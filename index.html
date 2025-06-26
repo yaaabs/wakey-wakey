@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Keep My Computer Awake</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #18192A;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Keep Computer Awake</h1>
+  <button id="toggleBtn">Activate Wake Lock</button>
+
+  <script>
+    let wakeLock = null;
+    const btn = document.getElementById('toggleBtn');
+    let isActive = false;
+
+    async function requestWakeLock() {
+      try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        wakeLock.addEventListener('release', () => {
+          console.log('Wake Lock was released');
+          btn.textContent = 'Activate Wake Lock';
+          isActive = false;
+        });
+        console.log('Wake Lock is active');
+      } catch (err) {
+        console.error(`${err.name}, ${err.message}`);
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      if (!isActive) {
+        requestWakeLock();
+        btn.textContent = 'Deactivate Wake Lock';
+        isActive = true;
+      } else {
+        if (wakeLock) {
+          wakeLock.release();
+          wakeLock = null;
+        }
+        btn.textContent = 'Activate Wake Lock';
+        isActive = false;
+      }
+    });
+
+    // Re-request on visibility change (browser/tab changes)
+    document.addEventListener('visibilitychange', () => {
+      if (wakeLock !== null && document.visibilityState === 'visible') {
+        requestWakeLock();
+      }
+    });
+  </script>
+</body>
+</html>
