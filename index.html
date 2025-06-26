@@ -1,27 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Keep My Computer Awake</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Keep My Computer Awake</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="center-content">
-    <h1>Keep Computer Awake</h1>
-    <button id="toggleBtn">Activate Wake Lock</button>
-  </div>
-  <script src="js/script.js"></script>
+    <div class="hallway"></div>
+    
+    <div class="center-content">
+        <div class="light-container">
+            <div class="chain"></div>
+            <div class="lightbulb" id="lightbulb">
+                <div class="bulb-base">
+                    <div class="thread"></div>
+                    <div class="thread"></div>
+                    <div class="thread"></div>
+                    <div class="thread"></div>
+                </div>
+                <div class="bulb-body">
+                    <div class="filament"></div>
+                    <div class="filament filament-2"></div>
+                    <div class="filament filament-3"></div>
+                </div>
+                <div class="bulb-top"></div>
+            </div>
+        </div>
+        
+        <h1>Keep Computer Awake</h1>
+        
+        <div class="status-text" id="statusText">
+            Wake lock is inactive
+        </div>
+        
+        <div class="switch-container">
+            <label class="switch">
+                <input type="checkbox" id="toggleSwitch">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
 
-  <br><br>  <br><br>  <br><br>  <br><br>  <br><br>
+    <footer class="footer">
+        <p>© 2025 Wakey Wakey - All Rights Reserved</p>
+        <p>
+            Try our other app:
+            <a href="https://customodoro.vercel.app/" target="_blank" rel="noopener">Customodoro Timer</a>
+        </p>
+    </footer>
 
-
-  <footer class="footer">
-    <p>© 2025 Wakey Wakey - All Rights Reserved</p>
-    <p>
-      Try our other app:
-      <a href="https://customodoro.vercel.app/" target="_blank" rel="noopener">Customodoro Timer</a>
-    </p>
-  </footer>
+    <script src="js/script.js"></script>
 </body>
 </html>

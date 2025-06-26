@@ -1,39 +1,139 @@
-    let wakeLock = null;
-    const btn = document.getElementById('toggleBtn');
-    let isActive = false;
+let wakeLock = null;
+const toggleSwitch = document.getElementById('toggleSwitch');
+const lightbulb = document.getElementById('lightbulb');
+const statusText = document.getElementById('statusText');
+const body = document.body;
+let isActive = false;
 
-    async function requestWakeLock() {
-      try {
-        wakeLock = await navigator.wakeLock.request('screen');
-        wakeLock.addEventListener('release', () => {
-          console.log('Wake Lock was released');
-          btn.textContent = 'Activate Wake Lock';
-          isActive = false;
-        });
-        console.log('Wake Lock is active');
-      } catch (err) {
-        console.error(`${err.name}, ${err.message}`);
-      }
+// Check if Wake Lock API is supported
+function isWakeLockSupported() {
+    return 'wakeLock' in navigator;
+}
+
+async function requestWakeLock() {
+    if (!isWakeLockSupported()) {
+        console.error('Wake Lock API is not supported in this browser');
+        statusText.textContent = 'Wake Lock not supported in this browser';
+        toggleSwitch.checked = false;
+        return false;
     }
 
-    btn.addEventListener('click', () => {
-      if (!isActive) {
-        requestWakeLock();
-        btn.textContent = 'Deactivate Wake Lock';
-        isActive = true;
-      } else {
-        if (wakeLock) {
-          wakeLock.release();
-          wakeLock = null;
-        }
-        btn.textContent = 'Activate Wake Lock';
-        isActive = false;
-      }
-    });
+    try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        
+        wakeLock.addEventListener('release', () => {
+            console.log('Wake Lock was released');
+            if (isActive) {
+                deactivateVisuals();
+            }
+        });
+        
+        console.log('Wake Lock is active');
+        return true;
+    } catch (err) {
+        console.error(`Wake Lock error: ${err.name}, ${err.message}`);
+        statusText.textContent = `Error: ${err.message}`;
+        toggleSwitch.checked = false;
+        return false;
+    }
+}
 
-    // Re-request on visibility change (browser/tab changes)
-    document.addEventListener('visibilitychange', () => {
-      if (wakeLock !== null && document.visibilityState === 'visible') {
-        requestWakeLock();
-      }
-    });
+function activateVisuals() {
+    body.classList.add('light-on');
+    lightbulb.classList.add('on');
+ 
+    statusText.textContent = '🌞 Wakey wakey! Your screen won\'t sleep.';
+    isActive = true;
+}
+
+function deactivateVisuals() {
+    body.classList.remove('light-on');
+    lightbulb.classList.remove('on');
+    statusText.textContent = '😴 Zzz... I\'m sleepy.';
+    toggleSwitch.checked = false;
+    isActive = false;
+}
+
+// Main toggle event
+toggleSwitch.addEventListener('change', async () => {
+    if (toggleSwitch.checked && !isActive) {
+        // Trying to activate
+        const success = await requestWakeLock();
+        if (success && wakeLock) {
+            activateVisuals();
+        } else {
+            toggleSwitch.checked = false;
+        }
+    } else if (!toggleSwitch.checked && isActive) {
+        // Trying to deactivate
+        if (wakeLock) {
+            try {
+                await wakeLock.release();
+                wakeLock = null;
+            } catch (err) {
+                console.error('Error releasing wake lock:', err);
+            }
+        }
+        deactivateVisuals();
+    }
+});
+
+// Re-request wake lock on visibility change (browser/tab changes)
+document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState === 'visible' && isActive && !wakeLock) {
+        console.log('Page became visible, re-requesting wake lock');
+        const success = await requestWakeLock();
+        if (!success) {
+            deactivateVisuals();
+        }
+    }
+});
+
+// Handle page unload
+window.addEventListener('beforeunload', () => {
+    if (wakeLock) {
+        wakeLock.release();
+    }
+});
+
+// Add subtle sound effect on toggle
+function playToggleSound(isOn) {
+    if (window.AudioContext || window.webkitAudioContext) {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(isOn ? 800 : 400, audioContext.currentTime);
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.2);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        } catch (err) {
+            // Audio context might not be available
+            console.log('Audio not available');
+        }
+    }
+}
+
+// Add sound to toggle
+toggleSwitch.addEventListener('change', () => {
+    playToggleSound(toggleSwitch.checked);
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    if (!isWakeLockSupported()) {
+        statusText.textContent = 'Wake Lock API not supported in this browser';
+        toggleSwitch.disabled = true;
+    } else {
+        statusText.textContent = '😴 Zzz... I\'m sleepy.';
+    }
+});
