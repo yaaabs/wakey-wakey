@@ -1,72 +1,44 @@
 <div align="center">
   <img src="favicon/favicon-32x32.png" width="64" alt="Wakey Wakey Logo" />
   <h1>Wakey Wakey 💡</h1>
-  <p><strong>Keep your computer awake with one click — no extensions, no installs, just open and go.</strong></p>
-
-  <p>
-    <img src="https://img.shields.io/badge/status-active-brightgreen?style=flat-square" />
-    <img src="https://img.shields.io/badge/made_with-html_css_js-blue?style=flat-square&logo=javascript" />
-    <img src="https://img.shields.io/badge/PWA-ready-orange?style=flat-square&logo=googlechrome" />
-    <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" />
-  </p>
+  <p><strong>A minimal browser app that keeps your screen awake — clean, distraction-free, and beautifully dark.</strong></p>
 
   <a href="https://wakeywakey.vercel.app" target="_blank">
-    🚀 Live Demo
+    <img src="https://img.shields.io/badge/🚀%20Live%20Demo-Click%20to%20Try-informational?style=for-the-badge&color=6f42c1" />
   </a>
+
+  <br><br>
+
+  <p align="center"><strong>Tech Stack</strong></p>
+  <p align="center">
+    <a href="https://skillicons.dev">
+      <img src="https://skillicons.dev/icons?i=html,css,js,pwa,vercel&perline=5" alt="Tech Stack" />
+    </a>
+  </p>
 </div>
 
 ---
 
-## 🌟 Overview
+## 🧠 Why I Built This
 
-**Wakey Wakey** is a minimal, dark-themed web app that uses the Wake Lock API to prevent your device from sleeping or locking. It's perfect for:
-- Watching long videos
-- Running downloads
-- Presenting slides
-- Working with unstable VPN connections
-- Grabbing coffee without logging back in 😴
+While working late-night shifts during my internship, I discovered that my laptop would frequently fall asleep — disconnecting my VPN and interrupting my workflow. Without the ability to modify system settings, I built **Wakey Wakey** as a lightweight, web-based alternative to keep my screen awake without hassle.
 
-No installations. No admin rights. Just open the tab and toggle it on.
+> _This app provides a clean and hassle-free solution for preventing your screen from locking or sleeping. Just toggle it on and let it run in the background — no installs, no extensions._
 
 ---
 
-## 👨‍💻 Why I Built This
+## ✨ Features
 
-During my internship, I often worked night shifts using a company-issued laptop. I couldn’t adjust sleep settings, and my VPN would randomly disconnect when the screen locked. Instead of relying on third-party tools, I built **Wakey Wakey** to solve the problem cleanly and efficiently using the Wake Lock API — now it’s a tool I use daily, and others can too.
-
-> _Whatever your reason, Wakey Wakey provides a simple and hassle-free way to prevent your computer from locking or sleeping. Just click the button and focus on your task — no interruptions._
-
----
-
-## 🧠 Features
-
-- 💡 Interactive bulb animation with toggle switch  
+- 💡 Dim-lit lightbulb visual with toggle animation  
 - 🔊 Toggle sound feedback  
-- 🌘 Dark UI with dim glow — no harsh light  
-- 🔁 Auto reactivation when returning to the tab  
-- 🧼 Minimal interface, no distractions  
-- 🛠️ PWA support — installable on desktop/mobile  
+- 🌘 Sleek dark mode interface  
+- 🔁 Automatically reactivates on tab visibility change  
+- 📱 PWA-ready and responsive across devices  
+- ✅ No setup required — works instantly in modern browsers
 
 ---
 
-## 🚀 Tech Stack
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=html,css,js,vercel" alt="My Skills" />
-  </a>
-</p>
-
-| Technology | Purpose               |
-|------------|-----------------------|
-| HTML/CSS   | Structure & styling   |
-| JavaScript | Wake Lock, UI logic   |
-| PWA        | Offline capabilities  |
-| Vercel     | Hosting & deployment  |
-
----
-
-## 🛠 How to Run Locally
+## 🛠 How to Use
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/wakey-wakey.git
