@@ -140,11 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // About modal handling
-document.addEventListener('DOMContentLoaded', function() {
-    const aboutLink = document.getElementById('about-link');
+document.addEventListener('DOMContentLoaded', function () {
     const modalOverlay = document.getElementById('about-modal-overlay');
     const closeBtn = document.getElementById('about-modal-close');
     const confirmBtn = document.getElementById('about-close-btn');
+
+    // Updated: Use querySelectorAll for both icon and footer link
+    const aboutTriggers = document.querySelectorAll('#about-icon, #about-link-footer');
 
     function openModal() {
         modalOverlay.classList.add('active');
@@ -156,22 +158,24 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
     }
 
-    // Event listeners
-    aboutLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        openModal();
+    // Add event listeners to both triggers
+    aboutTriggers.forEach(el => {
+        el.addEventListener('click', function (e) {
+            e.preventDefault();
+            openModal();
+        });
     });
 
     closeBtn.addEventListener('click', closeModal);
     confirmBtn.addEventListener('click', closeModal);
 
-    // Close when clicking outside modal content
-    modalOverlay.addEventListener('click', function(event) {
+    modalOverlay.addEventListener('click', function (event) {
         if (event.target === modalOverlay) {
             closeModal();
         }
     });
 });
+
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
