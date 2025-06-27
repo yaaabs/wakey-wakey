@@ -255,9 +255,11 @@ body.light-on .hallway {
     justify-content: center;
     z-index: 10;
     text-align: center;
-    padding-top: 30vh; 
-    min-height: 100vh; 
-    box-sizing: border-box; 
+    /* Removed padding-top and min-height as Bootstrap's .container handles vertical spacing and sizing */
+    /* If you're not using Bootstrap's .container, keep these: */
+    padding-top: clamp(8vh, 15vh, 20vh); /* Adjust as needed */
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -375,37 +377,135 @@ input:checked + .slider:hover {
         inset 0 -2px 6px rgba(0,0,0,0.1);
 }
 
-/* Footer */
-.footer {
-    position: fixed;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-    font-size: 0.9rem;
-    opacity: 0.6;
-    z-index: 10;
-    transition: opacity 0.6s ease;
+        /* Modern Footer Styles */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .footer:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .footer-brand strong {
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 0.8rem;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .footer-divider {
+            color: rgba(255, 255, 255, 0.3);
+            margin: 0 0.2rem;
+            font-weight: 300;
+        }
+
+      /* Responsive design for footer */
+
+/* Tablets and larger phones (up to 768px, but excluding very small phones) */
+@media (max-width: 768px) {
+    .footer {
+        padding: 1.25rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* Keep footer links in a row, with a smaller gap */
+    .footer-links {
+        flex-direction: row; /* Ensure row direction */
+        gap: 0.4rem; /* Slightly reduced gap */
+        flex-wrap: wrap; /* Allow wrapping if needed, but prioritize staying inline */
+        justify-content: center; /* Center items if they wrap */
+    }
+
+    .footer-divider {
+        display: inline; /* Keep dividers visible */
+        margin: 0 0.15rem; /* Make divider spacing more compact */
+    }
+
+    .footer-links a {
+        padding: 0.3rem 0.6rem; /* Slightly smaller padding for links */
+        font-size: 0.8rem; /* Match footer font size */
+    }
 }
 
-body.light-on .footer {
-    opacity: 0.8;
-}
+/* Very small mobile devices (e.g., iPhone SE portrait, up to 480px) */
+@media (max-width: 480px) {
+    .footer {
+        padding: 1rem 0.75rem; /* Even more compact padding */
+        font-size: 0.75rem; /* Smaller font size */
+    }
 
-.footer a {
-    color: #3498db;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
+    .footer-brand {
+        font-size: 0.8rem; /* Smaller brand text */
+        margin-bottom: 0.5rem; /* Reduced margin */
+    }
 
-.footer a:hover {
-    color: #2980b9;
-    text-decoration: underline;
-    text-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
-}
+    .footer-links {
+        gap: 0.3rem; /* Even smaller gap between links/dividers */
+        /* If items still stack awkwardly, you might consider letting them wrap,
+           but ideally, they'd stay on one line with this compact setup */
+    }
 
+    .footer-links a {
+        padding: 0.2rem 0.5rem; /* Minimal padding */
+    }
+}
 /* Responsive design */
 @media (max-width: 768px) {
+
+    .title-with-info h1 {
+        font-size: 2.2rem; /* Adjusted for smaller screens */
+    }
+    .info-icon svg {
+        width: 22px; /* Adjusted icon size */
+        height: 22px;
+    }
     h1 {
         font-size: 2.2rem;
     }
@@ -457,6 +557,14 @@ body.light-on .footer {
 }
 
 @media (max-width: 480px) {
+
+    .title-with-info h1 {
+        font-size: 1.8rem; /* Adjusted for very small screens */
+    }
+    .info-icon svg {
+        width: 18px; /* Adjusted icon size */
+        height: 18px;
+    }
     h1 {
         font-size: 1.8rem;
     }
@@ -484,4 +592,208 @@ body.light-on .footer {
         width: 60px;
         height: 20px;
     }
+}
+
+
+
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.25s, opacity 0.3s ease;
+    backdrop-filter: blur(3px);
+}
+
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.modal {
+    background: linear-gradient(145deg, rgb(45, 45, 55), rgb(25, 25, 35));
+    border-radius: 16px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25),
+                0 1px 8px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    overflow: hidden;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0) scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    position: relative;
+}
+
+.modal-header:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 4%;
+    right: 4%;
+    height: 1px;
+    background: linear-gradient(to right, 
+                transparent, 
+                rgba(255, 255, 255, 0.2) 20%, 
+                rgba(255, 255, 255, 0.2) 80%, 
+                transparent);
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: -0.01em;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.modal-content {
+    padding: 24px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+.modal-content p {
+    margin-bottom: 16px;
+    font-size: 15px;
+}
+
+.modal-content ul {
+    margin-bottom: 16px;
+    padding-left: 24px;
+}
+
+.modal-content li {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.modal-note {
+    background-color: rgba(139, 95, 191, 0.15);
+    border-left: 3px solid #8b5fbf;
+    padding: 12px 15px;
+    margin-top: 15px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.modal-footer {
+    padding: 16px 24px 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    background: linear-gradient(to bottom right, #4a7bff, #2e5cd8);
+    color: white;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ===== FLEX CONTAINER FOR TITLE & INFO ICON ===== */
+.title-with-info {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    margin-bottom: 2rem; 
+    flex-wrap: wrap;
+    text-align: center; 
+}
+
+.title-with-info h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 1.2; 
+    margin: 0; 
+    white-space: nowrap; 
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7); 
+    opacity: 0.9;
+    transition: all 0.6s ease;
+}
+
+.info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8b5fbf;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    padding: 5px; 
+    border-radius: 50%; 
+    box-sizing: content-box; 
+}
+
+.info-icon svg {
+    width: clamp(18px, 3vw, 26px);
+    height: clamp(18px, 3vw, 26px);
+    display: block; 
+}
+
+.info-icon:hover {
+    background: rgba(139, 95, 191, 0.3);
+    border-color: rgba(139, 95, 191, 0.5); 
+    transform: scale(1.1);
 }

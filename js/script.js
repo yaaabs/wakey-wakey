@@ -137,3 +137,41 @@ document.addEventListener('DOMContentLoaded', () => {
         statusText.textContent = '😴 Zzz... I\'m sleepy.';
     }
 });
+
+
+
+
+
+// About modal handling
+document.addEventListener('DOMContentLoaded', function() {
+    const aboutLink = document.getElementById('about-link');
+    const modalOverlay = document.getElementById('about-modal-overlay');
+    const closeBtn = document.getElementById('about-modal-close');
+    const confirmBtn = document.getElementById('about-close-btn');
+
+    function openModal() {
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Event listeners
+    aboutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        openModal();
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    confirmBtn.addEventListener('click', closeModal);
+
+    // Close when clicking outside modal content
+    modalOverlay.addEventListener('click', function(event) {
+        if (event.target === modalOverlay) {
+            closeModal();
+        }
+    });
+});

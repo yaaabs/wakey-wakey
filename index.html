@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keep My Computer Awake</title>
     <link rel="stylesheet" href="css/style.css">
+
+
 </head>
 <body>
     <div class="hallway"></div>
@@ -28,12 +30,22 @@
             </div>
         </div>
         
-        <h1>Keep Computer Awake</h1>
+<div class="title-with-info">
+    <h1>Keep Computer Awake</h1>
+    <span class="info-icon" id="about-link" title="About Wakey Wakey">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+    </span>
+</div>
+
         
         <div class="status-text" id="statusText">
             Wake lock is inactive
         </div>
-        
+           
         <div class="switch-container">
             <label class="switch">
                 <input type="checkbox" id="toggleSwitch">
@@ -42,14 +54,64 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <p>© 2025 Wakey Wakey - All Rights Reserved</p>
-        <p>
-            Try our other app:
-            <a href="https://customodoro.vercel.app/" target="_blank" rel="noopener">Customodoro Timer</a>
-        </p>
+   <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                © 2025 <strong>Wakey Wakey</strong> • Handcrafted by <strong><em>YabuTech</em></strong>
+            </div>
+            <nav class="footer-links">
+                <a href="#" id="about-link">About</a>
+                <span class="footer-divider">•</span>
+                <a href="mailto:yabutech@gmail.com">Contact</a>
+                <span class="footer-divider">•</span>
+                <a href="https://customodoro.vercel.app/" target="_blank" rel="noopener">Try Customodoro</a>
+                <span class="footer-divider">•</span>
+                <a href="https://www.linkedin.com/in/brian-yabut/" target="_blank" rel="noopener">Connect</a>
+            </nav>
+        </div>
     </footer>
 
+
+    <!-- About Modal -->
+<div class="modal-overlay" id="about-modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">About Wakey Wakey</h3>
+      <button class="modal-close" id="about-modal-close">&times;</button>
+    </div>
+
+    <div class="modal-content">
+      <p><strong>What is Wakey Wakey?</strong></p>
+      <p><em>Wakey Wakey</em> keeps your computer awake without needing to install software or change settings.</p>
+
+      <p><strong>Why I Built This:</strong></p>
+      <p>As an intern on the graveyard shift, my laptop would sleep every 5 minutes — and I couldn’t change the settings. I made this to stop that, so I could snack, think, or take breaks without interruptions.</p>
+
+      <p><strong>Key Features:</strong></p>
+      <ul>
+        <li>Prevents screen sleep or lock</li>
+        <li>No install, just toggle it on</li>
+        <li>Animated lightbulb for visual feedback</li>
+      </ul>
+
+      <div class="modal-note">
+        <p><strong>💡 Tip:</strong> Keep this tab open and visible for best results.</p>
+      </div>
+
+      <div class="modal-note">
+        <p><strong>🔒 Security Tip: Always lock before leaving.</p>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="modal-btn" id="about-close-btn">Thanks, got it!</button>
+    </div>
+  </div>
+</div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
