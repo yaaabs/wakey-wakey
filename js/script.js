@@ -139,9 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
-
-
 // About modal handling
 document.addEventListener('DOMContentLoaded', function() {
     const aboutLink = document.getElementById('about-link');
@@ -175,3 +172,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('Service Worker registered', reg))
+      .catch(err => console.log('Service Worker registration failed', err));
+  });
+}
