@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/YOUR_USERNAME/wakey-wakey/main/favicon/favicon-32x32.png" width="64" />
+  <img src="favicon/favicon-32x32.png" width="64" alt="Wakey Wakey Logo" />
   <h1>Wakey Wakey 💡</h1>
-  <p><strong>Keep your computer awake with style. No apps. No settings. Just one bright idea.</strong></p>
+  <p><strong>Keep your computer awake with one click — no extensions, no installs, just open and go.</strong></p>
 
   <p>
     <img src="https://img.shields.io/badge/status-active-brightgreen?style=flat-square" />
@@ -17,64 +17,58 @@
 
 ---
 
-## ✨ What is Wakey Wakey?
+## 🌟 Overview
 
-**Wakey Wakey** is a sleek, browser-based app designed to **keep your computer awake** — whether you're downloading something big, watching a long video, or simply taking a snack break during work.
+**Wakey Wakey** is a minimal, dark-themed web app that uses the Wake Lock API to prevent your device from sleeping or locking. It's perfect for:
+- Watching long videos
+- Running downloads
+- Presenting slides
+- Working with unstable VPN connections
+- Grabbing coffee without logging back in 😴
 
-It's powered by the **Wake Lock API**, styled like a glowing filament lightbulb, and built to work **with zero setup** — just toggle it on and leave the tab open. That’s it.
-
----
-
-## 📖 Backstory: Why I Built This
-
-> _"As an intern working the graveyard shift, I found myself constantly interrupted — my laptop would sleep every 5 minutes. I didn’t have admin rights to change settings. Frustrated, I created Wakey Wakey — a simple solution that kept my screen alive while I took short breaks or grabbed coffee."_
-
-This project became more than just a workaround — it became a little productivity hack, handcrafted for people like me... and maybe like you.
+No installations. No admin rights. Just open the tab and toggle it on.
 
 ---
 
-## 🎯 Purpose
+## 👨‍💻 Why I Built This
 
-Whether you're:
-- In a long video meeting ☕
-- Running a heavy download 🚚
-- Giving a live presentation 🧑‍🏫
-- Coding overnight 🌙
-- Or just... **eating chips 🍟**
+During my internship, I often worked night shifts using a company-issued laptop. I couldn’t adjust sleep settings, and my VPN would randomly disconnect when the screen locked. Instead of relying on third-party tools, I built **Wakey Wakey** to solve the problem cleanly and efficiently using the Wake Lock API — now it’s a tool I use daily, and others can too.
 
-> **Wakey Wakey provides a clean, distraction-free way to keep your screen awake** without installing anything.
-
-Just open the page, flick the virtual switch, and enjoy peace of mind.
-
----
-
-## 🛠 Tech Stack
-
-| Tech          | Description                     |
-|---------------|---------------------------------|
-| `HTML5`       | Semantic structure              |
-| `CSS3`        | Modern responsive design        |
-| `JavaScript`  | Wake Lock API + toggle logic    |
-| `PWA`         | Offline-ready via service worker|
-| `Vercel`      | Hosting & deployment            |
+> _Whatever your reason, Wakey Wakey provides a simple and hassle-free way to prevent your computer from locking or sleeping. Just click the button and focus on your task — no interruptions._
 
 ---
 
 ## 🧠 Features
 
-- 💤 Sleep prevention via Wake Lock API
-- 💡 Interactive dim-lit lightbulb animation
-- 🔊 Toggle sound feedback
-- 🌙 Clean dark mode UI
-- 📱 Fully responsive on all screen sizes
-- 📦 Offline support with Service Worker
-- 🧼 No clutter. No distractions. Just one purpose.
+- 💡 Interactive bulb animation with toggle switch  
+- 🔊 Toggle sound feedback  
+- 🌘 Dark UI with dim glow — no harsh light  
+- 🔁 Auto reactivation when returning to the tab  
+- 🧼 Minimal interface, no distractions  
+- 🛠️ PWA support — installable on desktop/mobile  
 
 ---
 
-## 🚀 How to Run Locally
+## 🚀 Tech Stack
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=html,css,js,vercel" alt="My Skills" />
+  </a>
+</p>
+
+| Technology | Purpose               |
+|------------|-----------------------|
+| HTML/CSS   | Structure & styling   |
+| JavaScript | Wake Lock, UI logic   |
+| PWA        | Offline capabilities  |
+| Vercel     | Hosting & deployment  |
+
+---
+
+## 🛠 How to Run Locally
 
 ```bash
-git clone https://github.com/yaaabs/wakey-wakey.git
+git clone https://github.com/YOUR_USERNAME/wakey-wakey.git
 cd wakey-wakey
 npx live-server
