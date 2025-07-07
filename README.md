@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="favicon/Wakey2x.png" width="150" alt="Wakey Wakey Logo" />
+  <img src="favicon/Wakey2x.png" width="500" alt="Wakey Wakey Logo" />
   <h1>Wakey Wakey 💡</h1>
   <p><strong>A minimal browser app that keeps your screen awake — clean, distraction-free, and beautifully dark.</strong></p>
 
