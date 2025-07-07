@@ -12,7 +12,7 @@
   <p align="center"><strong>Tech Stack</strong></p>
   <p align="center">
     <a href="https://skillicons.dev">
-      <img src="https://skillicons.dev/icons?i=html,css,js,pwa,vercel&perline=5" alt="Tech Stack" />
+      <img src="https://skillicons.dev/icons?i=html,css,js,vercel&perline=5" alt="Tech Stack" />
     </a>
   </p>
 </div>
