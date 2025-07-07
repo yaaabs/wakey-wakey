@@ -4,9 +4,13 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 16px; /* Base font size for rem units */
+}
+
 html, body {
-    height: 100vh;
-    overflow: hidden;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -14,9 +18,8 @@ body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
     color: white;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full viewport height */
     position: relative;
     transition: all 1s ease;
 }
@@ -46,15 +49,13 @@ body.light-on .hallway {
 
 /* Modern Light bulb container */
 .light-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    display: flex; 
+    position: relative; /* No longer absolute */
+    z-index: 1; /* Lowered z-index */
+    display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 0; 
+    margin-bottom: 2rem; /* Add space below the bulb */
+    flex-shrink: 0; /* Prevent the container from shrinking */
 }
 
 /* Chain/cord - Better connection to bulb base */
@@ -63,55 +64,54 @@ body.light-on .hallway {
     top: 0; 
     left: auto; 
     transform: none; 
-    width: 4px;
-    height: calc(50vh - 70px); 
-    height: clamp(80px, 30vh, 200px); 
+    width: 0.25rem; /* 4px */
+    height: clamp(3rem, 15vh, 8rem); /* Reduced height to prevent overflow */
     background: linear-gradient(to bottom, #666 0%, #444 50%, #333 100%);
     opacity: 0.9;
-    border-radius: 2px;
-    box-shadow: 
-        0 0 5px rgba(0,0,0,0.3),
-        inset 1px 0 2px rgba(255,255,255,0.1);
+    border-radius: 0.125rem; /* 2px */
+    box-shadow:
+        0 0 0.3125rem rgba(0,0,0,0.3), /* 5px */
+        inset 0.0625rem 0 0.125rem rgba(255,255,255,0.1); /* 1px, 2px */
 }
 
 .chain::after {
     content: '';
     position: absolute;
-    bottom: -5px; 
+    bottom: -0.3125rem; /* -5px */
     left: 50%;
     transform: translateX(-50%);
-    width: 8px;
-    height: 8px;
+    width: 0.5rem; /* 8px */
+    height: 0.5rem; /* 8px */
     background: #555;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.3); /* 2px, 4px */
 }
 
 /* Modern Light bulb - Hanging upside down */
 .lightbulb {
-    width: 100px;
-    height: 140px;
-    position: relative; 
-    margin: 0 auto; 
+    width: 6.25rem; /* 100px */
+    height: 8.75rem; /* 140px */
+    position: relative;
+    margin: 0 auto;
     transition: all 0.6s ease;
-    filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
-    margin-top: -5px; 
+    filter: drop-shadow(0 0 1.25rem rgba(0,0,0,0.5)); /* 20px */
+    margin-top: -0.3125rem; /* -5px */
 }
 
 .lightbulb.on {
-    filter: drop-shadow(0 0 40px rgba(255, 235, 59, 0.6));
+    filter: drop-shadow(0 0 2.5rem rgba(255, 235, 59, 0.6)); /* 40px */
 }
 
 /* Bulb base (screw part) - Now at the top */
 .bulb-base {
-    width: 80px;
-    height: 25px;
+    width: 5rem; /* 80px */
+    height: 1.5625rem; /* 25px */
     background: linear-gradient(180deg, #666 0%, #444 50%, #333 100%);
     margin: 0 auto;
     position: relative;
-    border-radius: 8px 8px 0 0;
+    border-radius: 0.5rem 0.5rem 0 0; /* 8px */
     transition: all 0.6s ease;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 0.0625rem solid rgba(255,255,255,0.1); /* 1px */
 }
 
 .lightbulb.on .bulb-base {
@@ -120,33 +120,33 @@ body.light-on .hallway {
 
 /* Bulb neck (transition part) */
 .bulb-body {
-    width: 85px;
-    height: 25px;
+    width: 5.3125rem; /* 85px */
+    height: 1.5625rem; /* 25px */
     background: linear-gradient(180deg, #333 0%, #2a2a2a 100%);
     margin: 0 auto;
     position: relative;
     transition: all 0.6s ease;
-    border-left: 1px solid rgba(255,255,255,0.1);
-    border-right: 1px solid rgba(255,255,255,0.1);
+    border-left: 0.0625rem solid rgba(255,255,255,0.1); /* 1px */
+    border-right: 0.0625rem solid rgba(255,255,255,0.1); /* 1px */
 }
 
 .lightbulb.on .bulb-body {
     background: linear-gradient(180deg, #ffd93d 0%, #fff9c4 100%);
     border-color: rgba(255,235,59,0.3);
     box-shadow: 
-        0 0 15px rgba(255, 235, 59, 0.3),
-        inset 0 0 10px rgba(255,255,255,0.1);
+        0 0 0.9375rem rgba(255, 235, 59, 0.3), /* 15px */
+        inset 0 0 0.625rem rgba(255,255,255,0.1); /* 10px */
 }
 
 /* Bulb main body (rounded glass part) - Now at the bottom */
 .bulb-top {
-    width: 100px;
-    height: 90px;
+    width: 6.25rem; /* 100px */
+    height: 5.625rem; /* 90px */
     background: linear-gradient(180deg, #2a2a2a 0%, #404040 30%, #3a3a3a 70%, #2a2a2a 100%);
-    border-radius: 0 0 50px 50px;
+    border-radius: 0 0 3.125rem 3.125rem; /* 50px */
     position: relative;
     transition: all 0.6s ease;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 0.0625rem solid rgba(255,255,255,0.1); /* 1px */
     border-top: none;
     margin: 0 auto;
     /* Glass reflection effect */
@@ -159,9 +159,9 @@ body.light-on .hallway {
     background: linear-gradient(180deg, #fff9c4 0%, #f5e56b 30%, #ffd93d 70%, #ffcc02 100%);
     border-color: rgba(255,235,59,0.3);
     box-shadow: 
-        0 0 40px rgba(255, 235, 59, 0.5),
-        inset 0 0 30px rgba(255,255,255,0.3),
-        inset 0 10px 20px rgba(255,255,255,0.2);
+        0 0 2.5rem rgba(255, 235, 59, 0.5), /* 40px */
+        inset 0 0 1.875rem rgba(255,255,255,0.3), /* 30px */
+        inset 0 0.625rem 1.25rem rgba(255,255,255,0.2); /* 10px, 20px */
     /* Enhanced glass reflection when on */
     background-image: 
         linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.4) 35%, rgba(255,255,255,0.6) 40%, transparent 45%),
@@ -171,13 +171,13 @@ body.light-on .hallway {
 /* Modern filaments - Adjusted for upside down bulb */
 .filament {
     position: absolute;
-    top: 20px;
+    top: 1.25rem; /* 20px */
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
-    height: 45px;
+    width: 0.125rem; /* 2px */
+    height: 2.8125rem; /* 45px */
     background: rgba(255,255,255,0.15);
-    border-radius: 1px;
+    border-radius: 0.0625rem; /* 1px */
     opacity: 0;
     transition: all 0.4s ease;
 }
@@ -185,65 +185,65 @@ body.light-on .hallway {
 .filament::before {
     content: '';
     position: absolute;
-    top: 15px;
-    left: -10px;
-    width: 22px;
-    height: 1px;
+    top: 0.9375rem; /* 15px */
+    left: -0.625rem; /* -10px */
+    width: 1.375rem; /* 22px */
+    height: 0.0625rem; /* 1px */
     background: inherit;
-    border-radius: 1px;
+    border-radius: 0.0625rem; /* 1px */
 }
 
 .filament::after {
     content: '';
     position: absolute;
-    top: 30px;
-    left: -10px;
-    width: 22px;
-    height: 1px;
+    top: 1.875rem; /* 30px */
+    left: -0.625rem; /* -10px */
+    width: 1.375rem; /* 22px */
+    height: 0.0625rem; /* 1px */
     background: inherit;
-    border-radius: 1px;
+    border-radius: 0.0625rem; /* 1px */
 }
 
 .filament-2 {
-    top: 25px;
+    top: 1.5625rem; /* 25px */
     left: 30%;
-    height: 35px;
+    height: 2.1875rem; /* 35px */
     transform: rotate(20deg);
 }
 
 .filament-3 {
-    top: 25px;
+    top: 1.5625rem; /* 25px */
     left: 70%;
-    height: 35px;
+    height: 2.1875rem; /* 35px */
     transform: rotate(-20deg);
 }
 
 .lightbulb.on .filament {
     opacity: 1;
     background: rgba(255,160,0,0.9);
-    box-shadow: 0 0 8px rgba(255,160,0,0.6);
+    box-shadow: 0 0 0.5rem rgba(255,160,0,0.6); /* 8px */
 }
 
 .lightbulb.on .filament::before,
 .lightbulb.on .filament::after {
     background: rgba(255,160,0,0.8);
-    box-shadow: 0 0 4px rgba(255,160,0,0.4);
+    box-shadow: 0 0 0.25rem rgba(255,160,0,0.4); /* 4px */
 }
 
 /* Screw threads - Now at the top */
 .thread {
     position: absolute;
     width: 90%;
-    height: 2px;
+    height: 0.125rem; /* 2px */
     background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
-    border-radius: 1px;
+    border-radius: 0.0625rem; /* 1px */
     left: 5%;
 }
 
-.thread:nth-child(1) { top: 4px; }
-.thread:nth-child(2) { top: 9px; }
-.thread:nth-child(3) { top: 14px; }
-.thread:nth-child(4) { top: 19px; }
+.thread:nth-child(1) { top: 0.25rem; } /* 4px */
+.thread:nth-child(2) { top: 0.5625rem; } /* 9px */
+.thread:nth-child(3) { top: 0.875rem; } /* 14px */
+.thread:nth-child(4) { top: 1.1875rem; } /* 19px */
 
 
 
@@ -255,33 +255,31 @@ body.light-on .hallway {
     justify-content: center;
     z-index: 10;
     text-align: center;
-    /* Removed padding-top and min-height as Bootstrap's .container handles vertical spacing and sizing */
-    /* If you're not using Bootstrap's .container, keep these: */
-    padding-top: clamp(8vh, 15vh, 20vh); /* Adjust as needed */
-    min-height: 100vh;
-    box-sizing: border-box;
+    flex: 1 0 auto; /* Allow this container to grow and fill available space */
+    padding: 2rem 1rem;
+    width: 100%;
 }
 
 h1 {
-    font-size: 2.8rem;
-    margin-bottom: 2rem;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    font-size: clamp(1.8rem, 5vw, 2.8rem); /* Fluid typography */
+    margin-bottom: 1rem;
+    text-shadow: 0.125rem 0.125rem 0.5rem rgba(0,0,0,0.7); /* 2px, 2px, 8px */
     opacity: 0.9;
     transition: all 0.6s ease;
     font-weight: 300;
-    letter-spacing: 1px;
+    letter-spacing: 0.0625rem; /* 1px */
 }
 
 body.light-on h1 {
     opacity: 1;
-    text-shadow: 2px 2px 12px rgba(0,0,0,0.4);
+    text-shadow: 0.125rem 0.125rem 0.75rem rgba(0,0,0,0.4); /* 2px, 2px, 12px */
     color: #ecf0f1;
 }
 
 /* Status text */
 .status-text {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
+    font-size: 1.1rem; /* Reduced from 1.3rem */
+    margin-bottom: 1.5rem;
     opacity: 0.7;
     transition: all 0.4s ease;
     font-weight: 300;
@@ -301,9 +299,9 @@ body.light-on .status-text {
 .switch {
     position: relative;
     display: inline-block;
-    width: 140px;
-    height: 70px;
-    margin-bottom: 20px;
+    width: 8.75rem; /* 140px */
+    height: 4.375rem; /* 70px */
+    margin-bottom: 1.25rem; /* 20px */
 }
 
 .switch input {
@@ -321,69 +319,66 @@ body.light-on .status-text {
     bottom: 0;
     background: linear-gradient(135deg, #2c3e50, #34495e);
     transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 35px;
-    box-shadow: 
-        0 6px 20px rgba(0,0,0,0.4),
-        inset 0 2px 6px rgba(255,255,255,0.1),
-        inset 0 -2px 6px rgba(0,0,0,0.2);
-    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 2.1875rem; /* 35px */
+    box-shadow:
+        0 0.375rem 1.25rem rgba(0,0,0,0.4), /* 6px, 20px */
+        inset 0 0.125rem 0.375rem rgba(255,255,255,0.1), /* 2px, 6px */
+        inset 0 -0.125rem 0.375rem rgba(0,0,0,0.2); /* -2px, 6px */
+    border: 0.125rem solid rgba(255,255,255,0.1); /* 2px */
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 54px;
-    width: 54px;
-    left: 8px;
-    bottom: 8px;
+    height: 3.375rem; /* 54px */
+    width: 3.375rem; /* 54px */
+    left: 0.5rem; /* 8px */
+    bottom: 0.5rem; /* 8px */
     background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
     transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 50%;
-    box-shadow: 
-        0 4px 12px rgba(0,0,0,0.4),
-        inset 0 2px 4px rgba(255,255,255,0.3);
+    box-shadow:
+        0 0.25rem 0.75rem rgba(0,0,0,0.4), /* 4px, 12px */
+        inset 0 0.125rem 0.25rem rgba(255,255,255,0.3); /* 2px, 4px */
 }
 
 input:checked + .slider {
     background: linear-gradient(135deg, #f39c12, #e67e22);
     box-shadow: 
-        0 6px 25px rgba(243, 156, 18, 0.5),
-        inset 0 2px 6px rgba(255,255,255,0.2),
-        inset 0 -2px 6px rgba(0,0,0,0.1);
+        0 0.375rem 1.5625rem rgba(243, 156, 18, 0.5), /* 6px, 25px */
+        inset 0 0.125rem 0.375rem rgba(255,255,255,0.2), /* 2px, 6px */
+        inset 0 -0.125rem 0.375rem rgba(0,0,0,0.1); /* -2px, 6px */
     border-color: rgba(255,235,59,0.3);
 }
 
 input:checked + .slider:before {
-    transform: translateX(70px);
+    transform: translateX(4.375rem); /* 70px */
     background: linear-gradient(135deg, #fff, #f1c40f);
-    box-shadow: 
-        0 4px 15px rgba(241, 196, 15, 0.6),
-        inset 0 2px 4px rgba(255,255,255,0.4);
+    box-shadow:
+        0 0.25rem 0.9375rem rgba(241, 196, 15, 0.6), /* 4px, 15px */
+        inset 0 0.125rem 0.25rem rgba(255,255,255,0.4); /* 2px, 4px */
 }
 
 /* Hover effects */
 .slider:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-        0 8px 25px rgba(0,0,0,0.5),
-        inset 0 2px 6px rgba(255,255,255,0.1),
-        inset 0 -2px 6px rgba(0,0,0,0.2);
+    transform: translateY(-0.125rem); /* -2px */
+    box-shadow:
+        0 0.5rem 1.5625rem rgba(0,0,0,0.5), /* 8px, 25px */
+        inset 0 0.125rem 0.375rem rgba(255,255,255,0.1), /* 2px, 6px */
+        inset 0 -0.125rem 0.375rem rgba(0,0,0,0.2); /* -2px, 6px */
 }
 
 input:checked + .slider:hover {
-    box-shadow: 
-        0 8px 30px rgba(243, 156, 18, 0.6),
-        inset 0 2px 6px rgba(255,255,255,0.2),
-        inset 0 -2px 6px rgba(0,0,0,0.1);
+    box-shadow:
+        0 0.5rem 1.875rem rgba(243, 156, 18, 0.6), /* 8px, 30px */
+        inset 0 0.125rem 0.375rem rgba(255,255,255,0.2), /* 2px, 6px */
+        inset 0 -0.125rem 0.375rem rgba(0,0,0,0.1); /* -2px, 6px */
 }
 
         /* Modern Footer Styles */
         .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem 2rem;
+            position: relative; /* Changed from fixed */
+            padding: 1.5rem 1rem;
             text-align: center;
             font-size: 0.875rem;
             line-height: 1.6;
@@ -392,6 +387,8 @@ input:checked + .slider:hover {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 100;
             transition: all 0.3s ease;
+            width: 100%;
+            flex-shrink: 0; /* Prevent footer from shrinking */
         }
 
         .footer:hover {
@@ -399,7 +396,7 @@ input:checked + .slider:hover {
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 75rem; /* 1200px */
             margin: 0 auto;
         }
 
@@ -412,6 +409,16 @@ input:checked + .slider:hover {
 
         .footer-brand strong {
             color: white;
+        }
+
+        /* Add version styling */
+        .footer-version {
+            font-size: 0.8em;
+            color: rgba(255,255,255,0.6);
+            font-weight: 400;
+            margin-left: 0.5em;
+            letter-spacing: 0.03em;
+            vertical-align: middle;
         }
 
         .footer-links {
@@ -428,7 +435,7 @@ input:checked + .slider:hover {
             padding: 0.4rem 0.8rem;
             text-decoration: none;
             color: rgba(255, 255, 255, 0.8);
-            border-radius: 6px;
+            border-radius: 0.375rem; /* 6px */
             transition: all 0.2s ease;
             font-weight: 500;
             position: relative;
@@ -437,7 +444,7 @@ input:checked + .slider:hover {
         .footer-links a:hover {
             color: white;
             background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-1px);
+            transform: translateY(-0.0625rem); /* -1px */
         }
 
         .footer-divider {
@@ -446,151 +453,39 @@ input:checked + .slider:hover {
             font-weight: 300;
         }
 
-      /* Responsive design for footer */
+/* ===== MOBILE-FIRST RESPONSIVE STYLES ===== */
 
-/* Tablets and larger phones (up to 768px, but excluding very small phones) */
-@media (max-width: 768px) {
-    .footer {
-        padding: 1.25rem 1rem;
-        font-size: 0.8rem;
-    }
+/* Base styles are mobile by default. */
 
-    /* Keep footer links in a row, with a smaller gap */
-    .footer-links {
-        flex-direction: row; /* Ensure row direction */
-        gap: 0.4rem; /* Slightly reduced gap */
-        flex-wrap: wrap; /* Allow wrapping if needed, but prioritize staying inline */
-        justify-content: center; /* Center items if they wrap */
-    }
-
-    .footer-divider {
-        display: inline; /* Keep dividers visible */
-        margin: 0 0.15rem; /* Make divider spacing more compact */
-    }
-
-    .footer-links a {
-        padding: 0.3rem 0.6rem; /* Slightly smaller padding for links */
-        font-size: 0.8rem; /* Match footer font size */
-    }
+/* Footer adjustments for mobile */
+.footer-links {
+    flex-direction: column; /* Stack links vertically on mobile */
+    gap: 0.75rem;
 }
 
-/* Very small mobile devices (e.g., iPhone SE portrait, up to 480px) */
-@media (max-width: 480px) {
-    .footer {
-        padding: 1rem 0.75rem; /* Even more compact padding */
-        font-size: 0.75rem; /* Smaller font size */
+.footer-divider {
+    display: none; /* Hide dividers on mobile */
+}
+
+/* Tablet and larger screens */
+@media (min-width: 48em) { /* 768px */
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .footer-brand {
-        font-size: 0.8rem; /* Smaller brand text */
-        margin-bottom: 0.5rem; /* Reduced margin */
+        margin-bottom: 0;
     }
 
     .footer-links {
-        gap: 0.3rem; /* Even smaller gap between links/dividers */
-        /* If items still stack awkwardly, you might consider letting them wrap,
-           but ideally, they'd stay on one line with this compact setup */
+        flex-direction: row; /* Horizontal links on larger screens */
+        gap: 0.5rem;
     }
 
-    .footer-links a {
-        padding: 0.2rem 0.5rem; /* Minimal padding */
-    }
-}
-/* Responsive design */
-@media (max-width: 768px) {
-
-    .title-with-info h1 {
-        font-size: 2.2rem; /* Adjusted for smaller screens */
-    }
-    .info-icon svg {
-        width: 22px; /* Adjusted icon size */
-        height: 22px;
-    }
-    h1 {
-        font-size: 2.2rem;
-    }
-    
-    .lightbulb {
-        width: 80px;
-        height: 110px;
-    }
-    
-    .bulb-top {
-        width: 80px;
-        height: 55px;
-    }
-    
-    .bulb-body {
-        width: 80px;
-        height: 30px;
-    }
-    
-    .bulb-base {
-        width: 70px;
-        height: 25px;
-    }
-    
-    .switch {
-        width: 120px;
-        height: 60px;
-    }
-    
-    .slider:before {
-        height: 44px;
-        width: 44px;
-        left: 8px;
-        bottom: 8px;
-    }
-    
-    input:checked + .slider:before {
-        transform: translateX(60px);
-    }
-    
-    .light-rays {
-        width: 250px;
-        height: 250px;
-    }
-    
-    .ray {
-        height: 100px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .title-with-info h1 {
-        font-size: 1.8rem; /* Adjusted for very small screens */
-    }
-    .info-icon svg {
-        width: 18px; /* Adjusted icon size */
-        height: 18px;
-    }
-    h1 {
-        font-size: 1.8rem;
-    }
-    
-    .status-text {
-        font-size: 1.1rem;
-    }
-    
-    .lightbulb {
-        width: 70px;
-        height: 95px;
-    }
-    
-    .bulb-top {
-        width: 70px;
-        height: 45px;
-    }
-    
-    .bulb-body {
-        width: 70px;
-        height: 25px;
-    }
-    
-    .bulb-base {
-        width: 60px;
-        height: 20px;
+    .footer-divider {
+        display: inline; /* Show dividers again */
     }
 }
 
@@ -625,14 +520,14 @@ input:checked + .slider:hover {
     background: linear-gradient(145deg, rgb(45, 45, 55), rgb(25, 25, 35));
     border-radius: 16px;
     width: 90%;
-    max-width: 480px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25),
-                0 1px 8px rgba(0, 0, 0, 0.1),
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    max-width: 30rem; /* 480px */
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.25), /* 10px, 30px */
+                0 0.0625rem 0.5rem rgba(0, 0, 0, 0.1), /* 1px, 8px */
+                0 0 0 0.0625rem rgba(255, 255, 255, 0.1) inset; /* 1px */
     overflow: hidden;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(1.25rem) scale(0.95); /* 20px */
     transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 0.0625rem solid rgba(255, 255, 255, 0.08); /* 1px */
 }
 
 .modal-overlay.active .modal {
@@ -643,7 +538,7 @@ input:checked + .slider:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
+    padding: 1.25rem 1.5rem; /* 20px, 24px */
     position: relative;
 }
 
@@ -653,17 +548,17 @@ input:checked + .slider:hover {
     bottom: 0;
     left: 4%;
     right: 4%;
-    height: 1px;
-    background: linear-gradient(to right, 
-                transparent, 
-                rgba(255, 255, 255, 0.2) 20%, 
-                rgba(255, 255, 255, 0.2) 80%, 
+    height: 0.0625rem; /* 1px */
+    background: linear-gradient(to right,
+                transparent,
+                rgba(255, 255, 255, 0.2) 20%,
+                rgba(255, 255, 255, 0.2) 80%,
                 transparent);
 }
 
 .modal-title {
     margin: 0;
-    font-size: 20px;
+    font-size: 1.25rem; /* 20px */
     font-weight: 600;
     color: white;
     letter-spacing: -0.01em;
@@ -672,13 +567,13 @@ input:checked + .slider:hover {
 .modal-close {
     background: none;
     border: none;
-    width: 32px;
-    height: 32px;
+    width: 2rem; /* 32px */
+    height: 2rem; /* 32px */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 1.5rem; /* 24px */
     cursor: pointer;
     color: rgba(255, 255, 255, 0.7);
     transition: all 0.2s ease;
@@ -690,64 +585,64 @@ input:checked + .slider:hover {
 }
 
 .modal-content {
-    padding: 24px;
+    padding: 1.5rem; /* 24px */
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
 }
 
 .modal-content p {
-    margin-bottom: 16px;
-    font-size: 15px;
+    margin-bottom: 1rem; /* 16px */
+    font-size: 0.9375rem; /* 15px */
 }
 
 .modal-content ul {
-    margin-bottom: 16px;
-    padding-left: 24px;
+    margin-bottom: 1rem; /* 16px */
+    padding-left: 1.5rem; /* 24px */
 }
 
 .modal-content li {
-    margin-bottom: 10px;
-    font-size: 14px;
+    margin-bottom: 0.625rem; /* 10px */
+    font-size: 0.875rem; /* 14px */
     color: rgba(255, 255, 255, 0.85);
 }
 
 .modal-note {
     background-color: rgba(139, 95, 191, 0.15);
-    border-left: 3px solid #8b5fbf;
-    padding: 12px 15px;
-    margin-top: 15px;
-    border-radius: 6px;
-    font-size: 14px;
+    border-left: 0.1875rem solid #8b5fbf; /* 3px */
+    padding: 0.75rem 0.9375rem; /* 12px, 15px */
+    margin-top: 0.9375rem; /* 15px */
+    border-radius: 0.375rem; /* 6px */
+    font-size: 0.875rem; /* 14px */
 }
 
 .modal-footer {
-    padding: 16px 24px 20px;
+    padding: 1rem 1.5rem 1.25rem; /* 16px, 24px, 20px */
     display: flex;
     justify-content: flex-end;
 }
 
 .modal-btn {
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem; /* 10px, 20px */
     background: linear-gradient(to bottom right, #4a7bff, #2e5cd8);
     color: white;
     border: none;
-    border-radius: 40px;
+    border-radius: 2.5rem; /* 40px */
     cursor: pointer;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 0.9375rem; /* 15px */
     letter-spacing: 0.02em;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 4px, 8px */
 }
 
 .modal-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.125rem); /* -2px */
+    box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.2); /* 6px, 12px */
 }
 
 .modal-btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(0.0625rem); /* 1px */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* 2px, 4px */
 }
 
 
@@ -755,21 +650,21 @@ input:checked + .slider:hover {
 .title-with-info {
     display: flex; 
     align-items: center; 
-    justify-content: center; 
-    gap: 10px; 
-    margin-bottom: 2rem; 
+    justify-content: center;
+    gap: 0.625rem; /* 10px */
+    margin-bottom: 1rem; /* Reduced from 2rem */
     flex-wrap: wrap;
-    text-align: center; 
+    text-align: center;
 }
 
 .title-with-info h1 {
     font-size: clamp(1.8rem, 5vw, 2.8rem);
     font-weight: 300;
-    letter-spacing: 1px;
-    line-height: 1.2; 
-    margin: 0; 
-    white-space: nowrap; 
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7); 
+    letter-spacing: 0.0625rem; /* 1px */
+    line-height: 1.2;
+    margin: 0;
+    white-space: nowrap;
+    text-shadow: 0.125rem 0.125rem 0.5rem rgba(0,0,0,0.7); /* 2px, 2px, 8px */
     opacity: 0.9;
     transition: all 0.6s ease;
 }
@@ -781,9 +676,9 @@ input:checked + .slider:hover {
     color: #8b5fbf;
     cursor: pointer;
     transition: transform 0.3s ease;
-    padding: 5px; 
-    border-radius: 50%; 
-    box-sizing: content-box; 
+    padding: 0.3125rem; /* 5px */
+    border-radius: 50%;
+    box-sizing: content-box;
 }
 
 .info-icon svg {
