@@ -3,7 +3,7 @@
   <h1>Wakey Wakey 💡</h1>
   <p><strong>A minimal browser app that keeps your screen awake — clean, distraction-free, and beautifully dark.</strong></p>
 
-  <a href="https://wakeywakey.vercel.app" target="_blank">
+  <a href="https://wakey2x.vercel.app/" target="_blank">
     <img src="https://img.shields.io/badge/🚀%20Live%20Demo-Click%20to%20Try-informational?style=for-the-badge&color=6f42c1" />
   </a>
 
