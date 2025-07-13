@@ -1,8 +1,10 @@
 {
-  "name": "Wakey Wakey - Keep Computer Awake",
+  "name": "WakeyWakey - Keep Your Computer Awake",
   "short_name": "WakeyWakey",
   "start_url": "/?v=3",
-  "display": "minimal-ui",
+  "scope": "./",
+  "description": "A lightweight and minimal tool to prevent your computer from going to sleep or locking the screen. Perfect for focused work, meetings, or downloading large files.",
+  "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#8b5fbf",
   "icons": [
