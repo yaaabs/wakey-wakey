@@ -54,8 +54,11 @@ function deactivateVisuals() {
     isActive = false;
 }
 
-// Main toggle event
+// Main toggle event with sound feedback
 toggleSwitch.addEventListener('change', async () => {
+    // Play sound feedback
+    playToggleSound(toggleSwitch.checked);
+    
     if (toggleSwitch.checked && !isActive) {
         // Trying to activate
         const success = await requestWakeLock();
@@ -123,11 +126,6 @@ function playToggleSound(isOn) {
     }
 }
 
-// Add sound to toggle
-toggleSwitch.addEventListener('change', () => {
-    playToggleSound(toggleSwitch.checked);
-});
-
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     if (!isWakeLockSupported()) {
@@ -177,10 +175,98 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+// Enhanced Service Worker registration with update handling
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('Service Worker registered', reg))
-      .catch(err => console.log('Service Worker registration failed', err));
+      .then(reg => {
+        console.log('✅ Service Worker registered', reg);
+        
+        // Check for updates periodically
+        setInterval(() => {
+          reg.update();
+        }, 60000); // Check every minute
+        
+        // Handle service worker updates
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          console.log('🔄 New Service Worker found, installing...');
+          
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // New service worker available, show update notification
+              console.log('✨ New version available! Refresh to update.');
+              showUpdateNotification();
+            }
+          });
+        });
+      })
+      .catch(err => console.error('⚠️ Service Worker registration failed:', err));
+  });
+}
+
+// Show update notification to user
+function showUpdateNotification() {
+  const updateBanner = document.createElement('div');
+  updateBanner.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #8b5fbf, #6a4a9e);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 350px;
+    animation: slideIn 0.3s ease-out;
+  `;
+  
+  updateBanner.innerHTML = `
+    <div style="flex: 1;">
+      <strong style="display: block; margin-bottom: 0.25rem;">✨ Update Available</strong>
+      <span style="font-size: 0.9rem; opacity: 0.95;">A new version of Wakey Wakey is ready!</span>
+    </div>
+    <button id="update-btn" style="
+      background: white;
+      color: #8b5fbf;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    ">Update</button>
+  `;
+  
+  document.body.appendChild(updateBanner);
+  
+  // Add animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from {
+        transform: translateX(400px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  // Handle update button click
+  document.getElementById('update-btn').addEventListener('click', () => {
+    if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: 'SKIP_WAITING' });
+    }
+    window.location.reload();
   });
 }
