@@ -21,49 +21,52 @@ const urlsToCache = [
   // YabuTech branding images
   "/images/YabuTech Circle.png",
   "/images/YabuTech Horizontal.png",
-  "/images/YabuTech Square.png"
+  "/images/YabuTech Square.png",
 ];
 
 // Install event - cache all essential files
 self.addEventListener("install", (event) => {
-  console.log('[Service Worker] Installing...');
+  console.log("[Service Worker] Installing...");
   event.waitUntil(
-    caches.open(CACHE_NAME)
+    caches
+      .open(CACHE_NAME)
       .then((cache) => {
-        console.log('[Service Worker] Caching app shell and assets');
+        console.log("[Service Worker] Caching app shell and assets");
         return cache.addAll(urlsToCache);
       })
       .then(() => {
-        console.log('[Service Worker] Installation complete');
+        console.log("[Service Worker] Installation complete");
         // Force the waiting service worker to become the active service worker
         return self.skipWaiting();
       })
       .catch((error) => {
-        console.error('[Service Worker] Installation failed:', error);
-      })
+        console.error("[Service Worker] Installation failed:", error);
+      }),
   );
 });
 
 // Activate event - clean up old caches
 self.addEventListener("activate", (event) => {
-  console.log('[Service Worker] Activating...');
+  console.log("[Service Worker] Activating...");
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cache) => {
-          // Delete old caches
-          if (cache !== CACHE_NAME && cache !== RUNTIME_CACHE) {
-            console.log('[Service Worker] Deleting old cache:', cache);
-            return caches.delete(cache);
-          }
-        })
-      );
-    })
-    .then(() => {
-      console.log('[Service Worker] Activation complete');
-      // Claim all clients immediately
-      return self.clients.claim();
-    })
+    caches
+      .keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cache) => {
+            // Delete old caches
+            if (cache !== CACHE_NAME && cache !== RUNTIME_CACHE) {
+              console.log("[Service Worker] Deleting old cache:", cache);
+              return caches.delete(cache);
+            }
+          }),
+        );
+      })
+      .then(() => {
+        console.log("[Service Worker] Activation complete");
+        // Claim all clients immediately
+        return self.clients.claim();
+      }),
   );
 });
 
@@ -78,40 +81,42 @@ self.addEventListener("fetch", (event) => {
   }
 
   event.respondWith(
-    caches.match(request)
-      .then((cachedResponse) => {
-        if (cachedResponse) {
-          console.log('[Service Worker] Serving from cache:', request.url);
-          return cachedResponse;
-        }
+    caches.match(request).then((cachedResponse) => {
+      if (cachedResponse) {
+        console.log("[Service Worker] Serving from cache:", request.url);
+        return cachedResponse;
+      }
 
-        // If not in cache, fetch from network
-        return fetch(request)
-          .then((networkResponse) => {
-            // Don't cache non-successful responses
-            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-              return networkResponse;
-            }
-
-            // Clone the response - one for the browser, one for the cache
-            const responseToCache = networkResponse.clone();
-
-            // Cache runtime requests for better offline experience
-            caches.open(RUNTIME_CACHE)
-              .then((cache) => {
-                console.log('[Service Worker] Caching new resource:', request.url);
-                cache.put(request, responseToCache);
-              });
-
+      // If not in cache, fetch from network
+      return fetch(request)
+        .then((networkResponse) => {
+          // Don't cache non-successful responses
+          if (
+            !networkResponse ||
+            networkResponse.status !== 200 ||
+            networkResponse.type !== "basic"
+          ) {
             return networkResponse;
-          })
-          .catch((error) => {
-            console.error('[Service Worker] Fetch failed:', error);
-            
-            // Return a custom offline page if you have one
-            // Or return a generic offline message
-            return new Response(
-              `<html>
+          }
+
+          // Clone the response - one for the browser, one for the cache
+          const responseToCache = networkResponse.clone();
+
+          // Cache runtime requests for better offline experience
+          caches.open(RUNTIME_CACHE).then((cache) => {
+            console.log("[Service Worker] Caching new resource:", request.url);
+            cache.put(request, responseToCache);
+          });
+
+          return networkResponse;
+        })
+        .catch((error) => {
+          console.error("[Service Worker] Fetch failed:", error);
+
+          // Return a custom offline page if you have one
+          // Or return a generic offline message
+          return new Response(
+            `<html>
                 <head>
                   <title>Offline - Wakey Wakey</title>
                   <style>
@@ -151,18 +156,18 @@ self.addEventListener("fetch", (event) => {
                   </div>
                 </body>
               </html>`,
-              {
-                headers: { 'Content-Type': 'text/html' }
-              }
-            );
-          });
-      })
+            {
+              headers: { "Content-Type": "text/html" },
+            },
+          );
+        });
+    }),
   );
 });
 
 // Listen for messages from the client to update the service worker
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 });

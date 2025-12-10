@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/🚀%20Live%20Demo-Click%20to%20Try-informational?style=for-the-badge&color=6f42c1" />
   </a>
 
-  <br><br>
+<br><br>
 
   <p align="center"><strong>Tech Stack</strong></p>
   <p align="center">
@@ -29,11 +29,11 @@ While working late-night shifts during my internship, I discovered that my lapto
 
 ## ✨ Features
 
-- 💡 Dim-lit lightbulb visual with toggle animation  
-- 🔊 Toggle sound feedback  
-- 🌘 Sleek dark mode interface  
-- 🔁 Automatically reactivates on tab visibility change  
-- 📱 PWA-ready and responsive across devices  
+- 💡 Dim-lit lightbulb visual with toggle animation
+- 🔊 Toggle sound feedback
+- 🌘 Sleek dark mode interface
+- 🔁 Automatically reactivates on tab visibility change
+- 📱 PWA-ready and responsive across devices
 - ✅ No setup required — works instantly in modern browsers
 
 ---
@@ -44,3 +44,4 @@ While working late-night shifts during my internship, I discovered that my lapto
 git clone https://github.com/YOUR_USERNAME/wakey-wakey.git
 cd wakey-wakey
 npx live-server
+```

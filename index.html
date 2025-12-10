@@ -1,115 +1,157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Keep My Computer Awake</title>
 
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" id="favicon">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="shortcut icon" href="favicon/favicon.ico">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+      id="favicon"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon/favicon-16x16.png"
+    />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
 
-  <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json" />
 
-    <link rel="stylesheet" href="css/style.css">
-
-
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
     <div class="hallway"></div>
-    
+
     <div class="center-content">
-        <div class="light-container">
-            <div class="chain"></div>
-            <div class="lightbulb" id="lightbulb">
-                <div class="bulb-base">
-                    <div class="thread"></div>
-                    <div class="thread"></div>
-                    <div class="thread"></div>
-                    <div class="thread"></div>
-                </div>
-                <div class="bulb-body">
-                    <div class="filament"></div>
-                    <div class="filament filament-2"></div>
-                    <div class="filament filament-3"></div>
-                </div>
-                <div class="bulb-top"></div>
-            </div>
+      <div class="light-container">
+        <div class="chain"></div>
+        <div class="lightbulb" id="lightbulb">
+          <div class="bulb-base">
+            <div class="thread"></div>
+            <div class="thread"></div>
+            <div class="thread"></div>
+            <div class="thread"></div>
+          </div>
+          <div class="bulb-body">
+            <div class="filament"></div>
+            <div class="filament filament-2"></div>
+            <div class="filament filament-3"></div>
+          </div>
+          <div class="bulb-top"></div>
         </div>
-        <br> <br> <br>
-<div class="title-with-info">
-    <h1>Keep Computer Awake</h1>
-    <span class="info-icon" id="about-icon" title="About Wakey Wakey">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      </div>
+      <br />
+      <br />
+      <br />
+      <div class="title-with-info">
+        <h1>Keep Computer Awake</h1>
+        <span class="info-icon" id="about-icon" title="About Wakey Wakey">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <circle cx="12" cy="12" r="10"></circle>
             <line x1="12" y1="16" x2="12" y2="12"></line>
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
-        </svg>
-    </span>
-</div>
-
-        
-        <div class="status-text" id="statusText">
-            Wake lock is inactive
-        </div>
-           
-        <div class="switch-container">
-            <label class="switch">
-                <input type="checkbox" id="toggleSwitch">
-                <span class="slider"></span>
-            </label>
-        </div>
-    </div>
-
-   <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                © 2025 <strong>Wakey Wakey</strong>
-                <span class="footer-version">v1.4.5</span>
-                • Handcrafted by <strong><em>YabuTech</em></strong>
-            </div>
-            <nav class="footer-links">
-                <a href="#" id="about-link-footer">About</a>
-                <span class="footer-divider">•</span>
-                <a href="mailto:yabutech@gmail.com">Contact</a>
-                <span class="footer-divider">•</span>
-                <a href="https://customodoro.vercel.app/" target="_blank" rel="noopener">Try Customodoro</a>
-                <span class="footer-divider">•</span>
-                <a href="https://www.linkedin.com/in/brian-yabut/" target="_blank" rel="noopener">Connect</a>
-            </nav>
-        </div>
-    </footer>
-
-
-    <!-- About Modal -->
-<div class="modal-overlay" id="about-modal-overlay">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 class="modal-title">About Wakey Wakey</h3>
-      <button class="modal-close" id="about-modal-close">&times;</button>
-    </div>
-
-    <div class="modal-content">
-      <p><strong>What is Wakey Wakey?</strong></p>
-      <p><em>Wakey Wakey</em> keeps your computer awake without needing to install software or change settings.</p>
-
-      <p><strong>Why I Built This?</strong></p>
-      <p>As an intern on the graveyard shift, my work laptop would sleep every 5 minutes — and I couldn’t change the settings. I built this so I could eat lunch, grab a snack, or take a break without constant interruptions.</p>
-
-      <div class="modal-note">
-        <p><strong>💡 Tip:</strong> Keep this tab open and visible for best results.</p>
+          </svg>
+        </span>
       </div>
 
+      <div class="status-text" id="statusText">Wake lock is inactive</div>
 
+      <div class="switch-container">
+        <label class="switch">
+          <input type="checkbox" id="toggleSwitch" />
+          <span class="slider"></span>
+        </label>
+      </div>
     </div>
 
-    <div class="modal-footer">
-      <button class="modal-btn" id="about-close-btn">Thanks, got it!</button>
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          © 2025 <strong>Wakey Wakey</strong>
+          <span class="footer-version">v1.4.5</span>
+          • Handcrafted by <strong><em>YabuTech</em></strong>
+        </div>
+        <nav class="footer-links">
+          <a href="#" id="about-link-footer">About</a>
+          <span class="footer-divider">•</span>
+          <a href="mailto:yabutech@gmail.com">Contact</a>
+          <span class="footer-divider">•</span>
+          <a
+            href="https://customodoro.vercel.app/"
+            target="_blank"
+            rel="noopener"
+            >Try Customodoro</a
+          >
+          <span class="footer-divider">•</span>
+          <a
+            href="https://www.linkedin.com/in/brian-yabut/"
+            target="_blank"
+            rel="noopener"
+            >Connect</a
+          >
+        </nav>
+      </div>
+    </footer>
+
+    <!-- About Modal -->
+    <div class="modal-overlay" id="about-modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">About Wakey Wakey</h3>
+          <button class="modal-close" id="about-modal-close">&times;</button>
+        </div>
+
+        <div class="modal-content">
+          <p><strong>What is Wakey Wakey?</strong></p>
+          <p>
+            <em>Wakey Wakey</em> keeps your computer awake without needing to
+            install software or change settings.
+          </p>
+
+          <p><strong>Why I Built This?</strong></p>
+          <p>
+            As an intern on the graveyard shift, my work laptop would sleep
+            every 5 minutes — and I couldn’t change the settings. I built this
+            so I could eat lunch, grab a snack, or take a break without constant
+            interruptions.
+          </p>
+
+          <div class="modal-note">
+            <p>
+              <strong>💡 Tip:</strong> Keep this tab open and visible for best
+              results.
+            </p>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="modal-btn" id="about-close-btn">
+            Thanks, got it!
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <script src="js/script.js"></script>
-</body>
+  </body>
 </html>
